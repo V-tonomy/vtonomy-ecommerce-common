@@ -1,4 +1,4 @@
-import { PagingRequestDTO } from "core/dto";
+import { PagingRequestDTO } from "core";
 
 export interface IQueryRepository<T, K = string> {
     findById(id: K): Promise<T | null>;
