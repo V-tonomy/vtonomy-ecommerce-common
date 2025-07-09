@@ -45,4 +45,5 @@ export const PORTS = {
   Cart_Service: 3004,
   Order_Service: 3005,
   Payment_Service: 3006,
+  Notification_Service: 3007,
 };
