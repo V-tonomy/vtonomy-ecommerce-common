@@ -26,6 +26,8 @@ export const User_Created = 'user.created';
 export const User_Updated = 'user.updated';
 export const User_Deleted = 'user.deleted';
 export const User_GetByEmail = 'user.getbyemail';
+export const User_EmailVerified = 'user.email-verified'
+export const User_PhoneVerified = 'user.phone-verified'
 
 export const CLIENTS = {
   Jwt_Client: 'jwt_client',
