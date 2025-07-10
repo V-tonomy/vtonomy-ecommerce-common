@@ -12,14 +12,15 @@ export async function sendWithTimeout<T>(
   ms = 3000,
   retryTimes = 0,
 ): Promise<T> {
-  return await firstValueFrom(
-    observable$.pipe(
-      timeout(ms),
-      retry(retryTimes),
-      catchError((err) => {
-        console.error('[Microservice Error]', err.message);
-        return throwError(() => err);
-      }),
-    ),
-  );
+  try {
+    return await firstValueFrom(
+      observable$.pipe(
+        timeout(ms),
+        retry(retryTimes)
+      )
+    );
+  } catch (err: any) {
+    console.error('[Microservice Error]', err.message || err);
+    throw err;
+  }
 }
