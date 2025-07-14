@@ -1,10 +1,9 @@
+import { GatewayTimeoutException, InternalServerErrorException, ServiceUnavailableException } from '@nestjs/common';
 import {
-    Observable,
-    catchError,
-    firstValueFrom,
-    retry,
-    throwError,
-    timeout,
+  Observable,
+  firstValueFrom,
+  retry,
+  timeout
 } from 'rxjs';
 
 export async function sendWithTimeout<T>(
@@ -20,7 +19,14 @@ export async function sendWithTimeout<T>(
       )
     );
   } catch (err: any) {
-    console.error('[Microservice Error]', err.message || err);
-    throw err;
+    if (err.name === 'TimeoutError') {
+      throw new GatewayTimeoutException('Microservice timed out');
+    }
+  
+    if (err.message?.includes('ECONNREFUSED')) {
+      throw new ServiceUnavailableException('Microservice is offline');
+    }
+  
+    throw new InternalServerErrorException('Something went wrong with user service');
   }
 }
