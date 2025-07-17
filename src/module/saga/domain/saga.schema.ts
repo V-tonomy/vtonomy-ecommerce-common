@@ -16,7 +16,7 @@ export class SagaMongo {
   status: ESagaStatus;
 
   @Prop({ required: true })
-  meta: Record<string, any> | null;
+  meta: string;
 
   @Prop({ required: true })
   createdAt: Date;

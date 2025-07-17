@@ -6,7 +6,7 @@ export class Saga {
     public readonly type: string,
     public readonly step: string,
     public readonly status: string,
-    public readonly meta: Record<string, any> | null,
+    public readonly meta: string,
     public readonly createdAt: Date,
     public readonly updatedAt: Date,
   ) {}
