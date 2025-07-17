@@ -1,14 +1,14 @@
 import {
-  CanActivate,
-  ExecutionContext,
-  Inject,
-  UnauthorizedException,
+    CanActivate,
+    ExecutionContext,
+    Inject,
+    UnauthorizedException,
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { CLIENTS } from 'constant';
 import { firstValueFrom } from 'rxjs';
+import { CLIENTS } from 'src/constant';
 
-export class JwtAuthGuard implements CanActivate {
+export class JwtGuard implements CanActivate {
   constructor(
     @Inject(CLIENTS.Auth_Client) private readonly authClient: ClientProxy,
   ) {}

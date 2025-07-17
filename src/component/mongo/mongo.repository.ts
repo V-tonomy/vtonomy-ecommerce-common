@@ -1,6 +1,6 @@
-import { PagingRequestDTO } from 'core/dto';
 import { Model } from 'mongoose';
 import { IRepository } from '../../interface';
+import { PagingRequestDTO } from 'src/dto';
 
 export abstract class MongoRepository<TEntity, TPersistence extends Document>
   implements IRepository<TEntity>
