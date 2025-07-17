@@ -4,9 +4,6 @@ import { ESagaStatus } from 'src/enum';
 // create-saga.dto.ts
 export class CreateSagaDTO {
   @IsString()
-  sagaId: string;
-
-  @IsString()
   type: string;
 
   @IsString()
