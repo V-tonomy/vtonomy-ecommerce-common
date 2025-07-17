@@ -15,7 +15,7 @@ export class CreateSagaDTO {
   @IsString()
   status: ESagaStatus;
   
-  meta: Record<string, any> | null;
+  meta: string;
 }
 
 export class UpdateSagaDTO {
@@ -31,5 +31,5 @@ export class UpdateSagaDTO {
   @IsOptional()
   status?: ESagaStatus;
   
-  meta?: Record<string, any> | null;
+  meta?: string;
 }

@@ -1,12 +1,12 @@
 import { IRepository } from 'src/interface';
-import { CreateSagaDTO, UpdateSagaDTO } from '../core';
+import { UpdateSagaDTO } from '../core';
 
 export interface ISaga {
   id: string;
   type: string;
   step: string;
   status: string;
-  meta: Record<string, any> | null;
+  meta: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -14,7 +14,7 @@ export interface ISaga {
 export interface ISagaPersistant {}
 
 export interface ISagaService {
-  insert(data: CreateSagaDTO): Promise<any>;
+  insert(data: ISaga): Promise<any>;
   updateById(id: string, data: UpdateSagaDTO): Promise<any>;
   deleteById(id: string): Promise<any>;
 }
