@@ -10,9 +10,8 @@ import { SagaRepository } from './infras/saga.repository';
     MongooseModule.forRoot(
       process.env.MONGODB_URL ?? 'mongodb://localhost:27017/ecommerce',
     ),
-    MongooseModule.forFeature([{ name: 'User', schema: SagaSchema }]),
+    MongooseModule.forFeature([{ name: 'Saga', schema: SagaSchema }]),
   ],
-  controllers: [],
   providers: [
     {
       provide: 'ISagaRepository',
