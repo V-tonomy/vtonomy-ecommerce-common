@@ -1,6 +1,9 @@
 // saga.entity.ts
 
-export class Saga {
+import { ISaga } from "./saga.interface";
+
+
+export class Saga implements ISaga {
   constructor(
     public readonly id: string,
     public readonly type: string,
