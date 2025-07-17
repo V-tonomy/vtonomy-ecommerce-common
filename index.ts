@@ -3,3 +3,4 @@ export * from './src/dto';
 export * from './src/helper';
 export * from './src/interface';
 export * from './src/module';
+export * from './src/component';
