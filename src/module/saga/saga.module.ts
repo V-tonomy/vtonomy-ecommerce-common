@@ -18,9 +18,12 @@ import { SagaRepository } from './infras/saga.repository';
       provide: 'ISagaRepository',
       useClass: SagaRepository,
     },
+    {
+      provide: 'ISagaService',
+      useClass: SagaService,
+    },
     ...SAGA_HANDLERS,
-    SagaService,
   ],
-  exports: [SagaService],
+  exports: ['ISagaService'],
 })
 export class SagaModule {}
