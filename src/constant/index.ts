@@ -29,6 +29,10 @@ export const User_GetByEmail = 'user.getbyemail';
 export const User_EmailVerified = 'user.email-verified'
 export const User_PhoneVerified = 'user.phone-verified'
 
+export const Saga_Created = 'saga.created';
+export const Saga_Updated = 'saga.updated';
+export const Saga_Deleted = 'saga.deleted';
+
 export const CLIENTS = {
   Jwt_Client: 'jwt_client',
   Auth_Client: 'auth_client',
@@ -36,6 +40,7 @@ export const CLIENTS = {
   Mail_Client: 'mail_client',
   User_Client: 'user_client',
   Notification_Client: 'notification_client',
+  Saga_Client: 'Saga_client',
 };
 
 export const PORTS = {
