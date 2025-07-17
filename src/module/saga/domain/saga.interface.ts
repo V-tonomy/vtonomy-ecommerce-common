@@ -1,5 +1,4 @@
 import { IRepository } from 'src/interface';
-import { UpdateSagaDTO } from '../core';
 
 export interface ISaga {
   id: string;
@@ -14,8 +13,8 @@ export interface ISaga {
 export interface ISagaPersistant {}
 
 export interface ISagaService {
-  insert(data: ISaga): Promise<any>;
-  updateById(id: string, data: UpdateSagaDTO): Promise<any>;
+  insert(data: any): Promise<any>;
+  updateById(id: string, data: any): Promise<any>;
   deleteById(id: string): Promise<any>;
 }
 
