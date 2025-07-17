@@ -7,9 +7,10 @@ import {
     UpdateSagaDTO,
 } from '../core';
 import { DeleteSagaByIdCommand } from '../core/command/delete-saga-by-id.cmd';
+import { ISagaService } from './saga.interface';
 
 @Injectable()
-export class SagaService {
+export class SagaService implements ISagaService {
   constructor(
     private commandBus: CommandBus,
     private queryBus: QueryBus,
