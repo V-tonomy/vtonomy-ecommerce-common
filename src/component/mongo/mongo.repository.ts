@@ -1,6 +1,6 @@
 import { Model } from 'mongoose';
-import { IRepository } from '../../interface';
 import { PagingRequestDTO } from 'src/dto';
+import { IRepository } from '../../interface';
 
 export abstract class MongoRepository<TEntity, TPersistence extends Document>
   implements IRepository<TEntity>
@@ -52,11 +52,16 @@ export abstract class MongoRepository<TEntity, TPersistence extends Document>
   }
 
   async insertMany(data: TEntity[]): Promise<boolean> {
+    if (!this.fromDomain) {
+      throw new Error('fromDomain has not been implemented yet');
+    }
     try {
-      await this.model.insertMany(data);
+      const docs = data.map((item) => this.fromDomain(item));
+      await this.model.insertMany(docs);
       return true;
     } catch (error) {
-      return false;
+      console.log("🚀 ~ insertMany ~ error:", error)
+      throw error
     }
   }
 
