@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import {
-    CreateSagaCommand,
-    CreateSagaDTO,
-    UpdateSagaByIdCommand,
-    UpdateSagaDTO,
+  CreateSagaCommand,
+  CreateSagaDTO,
+  UpdateSagaByIdCommand,
+  UpdateSagaDTO,
 } from '../core';
 import { DeleteSagaByIdCommand } from '../core/command/delete-saga-by-id.cmd';
 import { ISagaService } from './saga.interface';

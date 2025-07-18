@@ -1,14 +1,15 @@
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { MongooseModule } from '@nestjs/mongoose';
+import { RabbitmqModule } from '../rabbitmq';
 import { SAGA_HANDLERS } from './core';
-import { SagaSchema } from './domain';
-import { SagaService } from './domain/saga.service';
+import { SagaSchema, SagaService } from './domain';
 import { SagaRepository } from './infras/saga.repository';
 
 @Module({
   imports: [
     CqrsModule,
+    RabbitmqModule,
     MongooseModule.forRoot(
       process.env.MONGODB_URL ?? 'mongodb://localhost:27017/ecommerce',
     ),
@@ -25,6 +26,6 @@ import { SagaRepository } from './infras/saga.repository';
     },
     ...SAGA_HANDLERS,
   ],
-  exports: [SagaService],
+  exports: ['ISagaService'],
 })
 export class SagaModule {}
