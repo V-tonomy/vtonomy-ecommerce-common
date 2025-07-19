@@ -38,9 +38,6 @@ export abstract class MongoRepository<TEntity, TPersistence extends Document>
   }
 
   async insert(data: TEntity): Promise<boolean> {
-    if (this.fromDomain === undefined) {
-      throw new Error('fromDomain have not implemented yet');
-    }
 
     const insertDoc = this.fromDomain(data);
     try {
@@ -52,9 +49,6 @@ export abstract class MongoRepository<TEntity, TPersistence extends Document>
   }
 
   async insertMany(data: TEntity[]): Promise<boolean> {
-    if (!this.fromDomain) {
-      throw new Error('fromDomain has not been implemented yet');
-    }
     try {
       const docs = data.map((item) => this.fromDomain(item));
       await this.model.insertMany(docs);
@@ -67,9 +61,10 @@ export abstract class MongoRepository<TEntity, TPersistence extends Document>
 
   async updateById(id: string, data: Record<string, any>): Promise<boolean> {
     try {
-      await this.model.findByIdAndUpdate(id, data);
-      return true;
+      const result = await this.model.updateOne({ _id: id }, { $set: data });
+      return result.matchedCount > 0;
     } catch (error) {
+      console.error('updateById error:', error);
       throw error;
     }
   }
@@ -79,49 +74,54 @@ export abstract class MongoRepository<TEntity, TPersistence extends Document>
     data: Record<string, any>,
   ): Promise<boolean> {
     try {
-      await this.model.updateOne(cond, data);
-      return true;
+      const result = await this.model.updateOne(cond, { $set: data });
+      return result.matchedCount > 0;
     } catch (error) {
-      return false;
+      console.error('updateOne error:', error);
+      throw error;
     }
   }
 
   async updateMany(
     cond: Record<string, any>,
     data: Record<string, any>,
-  ): Promise<boolean> {
+  ): Promise<number> {
     try {
-      await this.model.updateMany(cond, data);
-      return true;
+      const result = await this.model.updateMany(cond, { $set: data });
+      return result.modifiedCount;
     } catch (error) {
-      return false;
+      console.error('updateMany error:', error);
+      throw error;
     }
   }
 
   async deleteById(id: string): Promise<boolean> {
     try {
-      await this.model.findByIdAndDelete(id);
-      return true;
+      const result = await this.model.deleteOne({ _id: id });
+      return result.deletedCount > 0;
     } catch (error) {
+      console.error('deleteById error:', error);
       throw error;
     }
   }
 
   async deleteOne(cond: Record<string, any>): Promise<boolean> {
     try {
-      await this.model.deleteOne(cond);
-      return true;
+      const result = await this.model.deleteOne(cond);
+      return result.deletedCount > 0;
     } catch (error) {
+      console.error('deleteOne error:', error);
       throw error;
     }
   }
 
-  async deleteMany(cond: Record<string, any>): Promise<boolean> {
+  async deleteMany(cond: Record<string, any>): Promise<number> {
     try {
-      await this.model.deleteMany(cond);
-      return true;
+      const result = await this.model.deleteMany(cond);
+      return result.deletedCount;
     } catch (error) {
-      return false;
+      console.error('deleteMany error:', error);
+      throw error;
     }
   }
 }

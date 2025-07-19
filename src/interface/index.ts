@@ -17,10 +17,10 @@ export interface ICommandRepository<T, K = string> {
   updateMany(
     cond: Record<string, any>,
     data: Record<string, any>,
-  ): Promise<boolean>;
+  ): Promise<number>;
   deleteById(id: K): Promise<boolean>;
   deleteOne(cond: Record<string, any>): Promise<boolean>;
-  deleteMany(cond: Record<string, any>): Promise<boolean>;
+  deleteMany(cond: Record<string, any>): Promise<number>;
 }
 
 export interface IRepository<T, K = string>
